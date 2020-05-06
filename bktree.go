@@ -45,6 +45,9 @@ func (this *BKTree) Size() int {
 }
 
 func (this *BKTree) insert(rt *bktreeNode, s string) bool {
+	if rt.str == s {
+		return true
+	}
 	d := Levenshtein(rt.str, s)
 	if d > this.levenshteinLimit {
 		return false

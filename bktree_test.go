@@ -53,6 +53,28 @@ func TestInsert(t *testing.T) {
 	}
 }
 
+func TestInsertIdenticalAndFind(t *testing.T) {
+	bk := New()
+	bk.SetLevenshteinLimit(2)
+
+	if !bk.Insert("AB") {
+		t.Fatal()
+	}
+
+	if !bk.Insert("AB") {
+		t.Fatal()
+	}
+
+	if bk.Size() != 2 {
+		t.Fatal()
+	}
+
+	ret := bk.Find("AB", 2)
+	if len(ret) != 1 && ret[0] != "AB" {
+		t.Fatal()
+	}
+}
+
 func TestInsertAndFind(t *testing.T) {
 	bk := New()
 	bk.SetLevenshteinLimit(50)
